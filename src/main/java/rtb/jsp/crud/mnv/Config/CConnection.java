@@ -16,7 +16,7 @@ public class CConnection {
       public CConnection(){
           try{
               Class.forName("com.mysql.jdbc.Driver");
-              con = DriverManager.getConnection("jdbc:mysql://localhost:3306/db","user","password");
+              con = DriverManager.getConnection("jdbc:mysql://poo-exoneration-project-db-1:3306/db","user","password");
           }catch(Exception e){
               System.err.println("Error on " + e);
           
