@@ -36,25 +36,37 @@ public class ReporteryService {
     
     ShipmentsDao shipmentDao = new ShipmentsDao();
     CustomerDao customerDao = new CustomerDao();
-    
-      protected String saveFile(String content) {
+    String defaultFilePath = System.getenv("REPORTING_SERVICE_DIRECTORY");
+
+    protected File createReport(String path) throws IOException {
+        File newFile =new File(path);
+        newFile.getParentFile().mkdirs();
+        newFile.createNewFile();
+        System.out.println("New file created at "+ newFile.getAbsolutePath());
+        return newFile;
+    }
+
+    protected String writeReport(String path,String content) throws IOException{
+        File newFile = this.createReport(path);
+        FileWriter file = new FileWriter(
+                newFile.getAbsolutePath()
+        );
+        file.write(content);
+        System.out.println("Successfully wrote to the file "+ path);
+        file.flush();
+        file.close();
+        return path;
+    }
+
+    protected String saveFile(String filePath ,String content) {
         String path = null;
         try {
-            String fileName = "html-report.html";
-            File newFile = new File(fileName);
-            newFile.createNewFile();
-            System.out.println(newFile.getAbsolutePath());
-            path = newFile.getAbsolutePath();
-            FileWriter file = new FileWriter(fileName);
-            file.write(content);
-            file.flush();
-            file.close();
-
-            System.out.println("Successfully wrote to the file");
+            path = this.writeReport(filePath,content);
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.err.println(filePath);
+            System.err.println(e.getMessage());
+            System.out.println("An error occurred creating file");
         }
-
         return path;
     }
 
@@ -111,7 +123,6 @@ public class ReporteryService {
         return currentBody;
 
     }
-
     public String generateSingleUserReport(int customer_id, String userName, String userIdentification) {
 
         var page = html(
@@ -122,7 +133,7 @@ public class ReporteryService {
                 this.buildTableForUser(customer_id, userName, userIdentification)
         );
 
-        return this.saveFile(page.render());
+        return this.saveFile(this.defaultFilePath,page.render());
     }
 
     public String generateAllUsersReport() {
@@ -136,6 +147,6 @@ public class ReporteryService {
                 each(currentCustomers, customer -> this.buildTableForUser(customer.getId(), customer.getName(), customer.getIdentification()))
         );
 
-        return this.saveFile(page.render());
+        return this.saveFile(this.defaultFilePath,page.render());
     }
 }

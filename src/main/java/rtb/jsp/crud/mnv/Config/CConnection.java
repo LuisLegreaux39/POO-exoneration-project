@@ -15,8 +15,10 @@ public class CConnection {
       Connection con;
       public CConnection(){
           try{
-              Class.forName("com.mysql.jdbc.Driver");
-              con = DriverManager.getConnection("jdbc:mysql://poo-exoneration-project-db-1:3306/db","user","password");
+              Class.forName("com.mysql.cj.jdbc.Driver");
+              String mysqlHost = System.getenv("DATABASE_MYSQL_HOST");
+              System.out.println(mysqlHost);
+              con = DriverManager.getConnection("jdbc:mysql://" + mysqlHost,"user","password");
           }catch(Exception e){
               System.err.println("Error on " + e);
           
