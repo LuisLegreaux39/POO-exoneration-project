@@ -7,7 +7,7 @@ services:
       # <Port exposed> : <MySQL Port running inside container>
       - '8080:8080'
     environment:
-      DATABASE_MYSQL_HOST: 'poo-exoneration-project-main-db-1:3306/db'
+      DATABASE_MYSQL_HOST: 'poo-exoneration-project-db-1:3306/db'
       REPORTING_SERVICE_DIRECTORY: 'webapps/report/index.html'
   db:
     platform: linux/x86_64

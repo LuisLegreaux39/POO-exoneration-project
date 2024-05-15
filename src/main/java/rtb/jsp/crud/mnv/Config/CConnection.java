@@ -15,7 +15,7 @@ public class CConnection {
       Connection con;
       public CConnection(){
           try{
-              Class.forName("com.mysql.cj.jdbc.Driver");
+              Class.forName("com.mysql.jdbc.Driver");
               String mysqlHost = System.getenv("DATABASE_MYSQL_HOST");
               System.out.println(mysqlHost);
               con = DriverManager.getConnection("jdbc:mysql://" + mysqlHost,"user","password");
