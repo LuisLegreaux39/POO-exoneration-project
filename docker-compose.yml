@@ -10,7 +10,6 @@ services:
       DATABASE_MYSQL_HOST: 'poo-exoneration-project-db-1:3306/db'
       REPORTING_SERVICE_DIRECTORY: 'webapps/report/index.html'
   db:
-    platform: linux/x86_64
     image: mysql:5.7
     restart: always
     environment:
