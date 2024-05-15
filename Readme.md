@@ -28,7 +28,18 @@ if using ARM Procesor need to use `platform: linux/x86_64` to the docker compose
 ```
 
 # Project screenshots
-
+### Home Page
+![Home Page](screenshots/HomePage.png)
+### Login
+![Login](screenshots/Login.png)
+### Welcome Page
+![Home Page](screenshots/WelcomePage.png)
+### Details page
+![Home Page](screenshots/DetailsPage.png)
+### Details Page
+![Home Page](screenshots/MyShipList.png)
+### Report page
+![Home Page](screenshots/Report.png)
 
 
 
